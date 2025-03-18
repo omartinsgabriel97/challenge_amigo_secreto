@@ -1,72 +1,63 @@
-//O principal objetivo deste desafio é fortalecer suas habilidades em lógica de programação. Aqui você deverá desenvolver a lógica para resolver o problema.
-
-
-//Array para armanezar os nomes dos amigos
+// Array para armazenar os nomes dos amigos
 let amigos = [];
 
-//Função para adicionar um amigo
-function adicionarAmigo (){
-    const inputAmigo = document.getElementById('amigo');
-    const nomeAmigo = inputAmigo.ariaValueMax.trim();
+// Função para adicionar um amigo
+function adicionarAmigo() {
+  const inputAmigo = document.getElementById('amigo');
+  const nomeAmigo = inputAmigo.value.trim(); // Capturar o valor corretamente
 
-    //Validando se o campo não está vazio
-    if (nome == ""){
-        alert("Por favor, insira um nome válido!")
-        return;
-    }
+  // Validando se o campo não está vazio
+  if (nomeAmigo === "") {
+    alert("Por favor, insira um nome válido!");
+    return;
+  }
 
-    //Validando se o nome já foi inserido anteriormente
-    if(amigos.includes(nomeAmigo)){
-        alert(`O nome ${nomeAmigo} já foi inserido na lista!`);
-        return;
-    }
+  // Validando se o nome já foi inserido anteriormente
+  if (amigos.includes(nomeAmigo)) {
+    alert(`O nome ${nomeAmigo} já foi inserido na lista!`);
+    return;
+  }
 
-    //Adicionar o nome ao array de amigos
-    amigos.push(nomeAmigo);
+  // Adicionar o nome ao array de amigos
+  amigos.push(nomeAmigo);
 
-    //Limpar o campo de entrada
-    inputAmigo.ariaValu = "";  
+  // Limpar o campo de entrada
+  inputAmigo.value = "";
 
-    //Atualizar a lista no HTML
-    atualizarLista();
-
+  // Atualizar a lista na interface
+  atualizarLista();
 }
 
-//Função para atualizar a lista de amigos na interface
-function atualizarLista(){
-    const listaAmigos = document.getElementById('listaAmigos')
+// Função para atualizar a lista de amigos na interface
+function atualizarLista() {
+  const listaAmigos = document.getElementById('listaAmigos');
 
-    //Limpar o conteúdo atual da Lista
-    listaAmigos.innerHTML = "";
+  // Limpar o conteúdo atual da lista
+  listaAmigos.innerHTML = "";
 
-    //Percorrer pelo array através do for
-    for(let i = 0; i <amigos.length; i++){
-        const li = document.createElement('li');
-        li.textContent = amigos[i];
-        listaAmigos.appendChild(li);
-    }
+  // Percorrer o array para exibir os nomes
+  for (let i = 0; i < amigos.length; i++) {
+    const li = document.createElement('li');
+    li.textContent = amigos[i];
+    listaAmigos.appendChild(li);
+  }
 }
 
+// Função para sortear um amigo aleatório
+function sortearAmigo() {
+  // Validar se há amigos disponíveis
+  if (amigos.length === 0) {
+    alert("Não há amigos disponíveis para sortear. Adicione amigos e tente novamente.");
+    return;
+  }
 
-//Função para sortear um amigo aleatório
-function sortearAmigo(){
-    //Validar que haja amigos disponíveis
-    if (amigos.length == 0){
-        alert("Não há amigos disponíveis para sortear. Adicione todos os amigos e refaça o sorteio.");
-        return;
+  // Gerar um índice aleatório
+  const indiceAleatorio = Math.floor(Math.random() * amigos.length);
 
-    }
+  // Obter o nome sorteado
+  const amigoSorteado = amigos[indiceAleatorio];
 
-
-    //Gerando um indíce aleatório
-    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
-
-    //Obtendo um número sorteado
-    const amigoSorteado = amigos[indiceAleatorio]; //Usa o indíce aleatório para obter um nome do array.
-
-    //Mostrando o resultado no HTML
-    const resultado = document.getElementById('resultado');
-    resultado.innerHTML = `Amigo Sorteado: <strong>${amigosorteado}</strong>`;
+  // Mostrar o resultado no HTML
+  const resultado = document.getElementById('resultado');
+  resultado.innerHTML = `Amigo Sorteado: <strong>${amigoSorteado}</strong>`;
 }
-
-
